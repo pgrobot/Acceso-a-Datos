@@ -1,61 +1,33 @@
 package servicio;
 
-
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ejemploJdbc.ActoresDao;
 import modelo.Actor;
 
 public class ActoresService {
 
-	
-	
-	
-	public List<Actor> consultarActores() throws ActorServiceException, SQLException{
-		
-		List<Actor> lista = new ArrayList<>();
+	public List<Actor> consultarActores() throws ActorServiceException {
+		OpenConnection connOpen = new OpenConnection();
+		ActoresDao actorD = new ActoresDao();
 		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-
 		try {
-
-			OpenConnection op = new OpenConnection();
-			conn = op.getConnection();
-
-			String sql = "SELECT * FROM ACTOR";
-			stmt = conn.prepareStatement(sql);
-
-			rs = stmt.executeQuery();
-			while (rs.next()) {
-				Actor equipo = new Actor();
-				equipo.setId(rs.getInt("actor_id"));
-				equipo.setNombre(rs.getString("first_name"));
-				equipo.setApellido(rs.getString("last_name"));
-				lista.add(equipo);
-			}
+			conn=connOpen.getConnection();
 		} catch (SQLException e) {
-			throw new ActorServiceException("Hay algun error con los actores");
+			e.printStackTrace();
 		}
-
-		finally {
-			if (stmt != null) {
-				stmt.close();
-			}
-			if (conn != null) {
+		List<Actor> lista = new ArrayList<>();
+		lista=actorD.consultarActores(conn);
+			try {
 				conn.close();
-			}
+			} catch (Exception e) {
 
-		}
+			}
+		
 
 		return lista;
 	}
-	}
-
-
-	
-
+}

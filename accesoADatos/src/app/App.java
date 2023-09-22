@@ -1,6 +1,5 @@
 package app;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +17,8 @@ public class App {
 		List<Actor> actores = new ArrayList<>();
 		try {
 			actores = service.consultarActores();
-		} catch (ActorServiceException | SQLException e) {
-			e.printStackTrace();
+		} catch (ActorServiceException e) {
+			
 		} 
 		
 		for (Actor actor : actores) {
