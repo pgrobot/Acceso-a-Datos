@@ -1,6 +1,6 @@
 package ejercicio1Tema1.modelo;
 
-public class Pelicula {
+public class Cliente {
 
 	private Integer id;
 	private String titulo;
@@ -23,7 +23,7 @@ public class Pelicula {
 	public void setLongitud(Integer longitud) {
 		this.longitud = longitud;
 	}
-	@Override
+//	@Override
 	public String toString() {
 		return "Pelicula [id=" + id + ", titulo=" + titulo + ", longitud=" + longitud + "]";
 	}
