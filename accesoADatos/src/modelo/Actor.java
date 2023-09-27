@@ -30,7 +30,7 @@ public class Actor {
 		this.apellido = apellido;
 	}
 
-	@Override
+//	@Override
 	public String toString() {
 		return "Actor [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + "]";
 	}
