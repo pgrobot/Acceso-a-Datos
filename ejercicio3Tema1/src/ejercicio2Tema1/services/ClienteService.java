@@ -31,10 +31,15 @@ public class ClienteService {
 			}
 
 		} catch (SQLException e) {
-			
-			throw new ClienteServiceException("Problema con los clientes",e);
-		}//cerrar conexion
-		
+
+			throw new ClienteServiceException("Problema con los clientes", e);
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {
+
+			}
+		}
 
 		return mapa;
 	}
