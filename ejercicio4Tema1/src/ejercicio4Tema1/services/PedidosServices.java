@@ -21,14 +21,15 @@ public class PedidosServices {
 		OpenConnection oc = new OpenConnection();
 		Connection conn = null;
 		List<LineaPedido> lP = new ArrayList<>();
-		
+		Long num;
 		try {
 			
 			conn= oc.getConnection();
 			conn.setAutoCommit(false);
-			daoInsPed.insertarPedido(conn, ped);
+			num=daoInsPed.insertarPedido(conn, ped);
 			lP=ped.getLineaPedidos();
 			for (LineaPedido lineaPedido : lP) {
+				lineaPedido.setIdPedido(num);
 				daoInsLinPed.insertarLinea(conn, lineaPedido);
 			}
 			conn.commit();
@@ -40,7 +41,7 @@ public class PedidosServices {
 
 				}
 			}
-			throw new PedidoServiceException("Hay un error con los pedidos"+e);
+			throw new PedidoServiceException("Hay un error con los pedidos"+e,e);
 		}finally {
 			
 			try {

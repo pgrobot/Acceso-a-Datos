@@ -16,7 +16,7 @@ public class DaoInsertLineaPedido {
 		PreparedStatement stmt = null;
 		
 		try {
-			String sql = "INSERT INTO PEDIDOS_LINEAS values(?,?,?,?)";
+			String sql = "INSERT INTO PEDIDOS_LINEAS  values(?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setLong(1, linea.getIdPedido());
 			stmt.setInt(2,linea.getNumeroLinea());
