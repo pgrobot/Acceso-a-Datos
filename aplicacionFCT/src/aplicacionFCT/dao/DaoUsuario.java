@@ -20,6 +20,7 @@ public class DaoUsuario {
 			stmt.setString(1, email);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
+				us.setEmail(rs.getString("email"));
 				us.setActivo(rs.getBoolean("activo"));
 				us.setApellidos(rs.getString("apellidos"));
 				us.setCiclo(rs.getString("ciclo"));

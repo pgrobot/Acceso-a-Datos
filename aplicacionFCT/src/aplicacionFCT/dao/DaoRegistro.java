@@ -18,9 +18,10 @@ public class DaoRegistro {
 		Registro regi = new Registro();
 		try {
 
-			String sql = "SELECT * FROM REGISTROS WHERE FECHA=?";
+			String sql = "SELECT * FROM REGISTROS WHERE FECHA=? AND ID_USUARIO=?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setDate(1, Date.valueOf(reg.getFecha()));
+			stmt.setLong(1, reg.getIdUsuario());
 			rs = stmt.executeQuery();
 			if (rs.next()) {
 				regi.setDescripcion(rs.getString("descripcion"));

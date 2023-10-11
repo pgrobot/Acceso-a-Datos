@@ -12,23 +12,18 @@ import ejercicio4Tema1.services.PedidoServiceException;
 import ejercicio4Tema1.services.PedidosServices;
 
 public class Test {
-	
-	
-	
-	
-	
+
 	public static void main(String[] args) {
 
-		
 		Scanner scanner = new Scanner(System.in);
-		
+
 		PedidosServices pD = new PedidosServices();
 		Pedido ped = new Pedido();
-		List<LineaPedido> listaPedidos = new ArrayList<>(); 
+		List<LineaPedido> listaPedidos = new ArrayList<>();
 		ped.setFechaPedido(LocalDate.now());
 		ped.setFechaEntrega(LocalDate.now());
 		ped.setCliente("El pepe");
-		
+
 		System.out.println("Cuantas lineas tiene tu epdido");
 		Integer num = scanner.nextInt();
 		scanner.nextLine();
@@ -38,24 +33,18 @@ public class Test {
 			lP.setPrecio(new BigDecimal(22.2));
 			System.out.println("Dime el nombre");
 			lP.setArticulo(scanner.nextLine());
-			
+
 			listaPedidos.add(lP);
 		}
 		ped.setLineaPedidos(listaPedidos);
 		try {
 			pD.registrarPedido(ped);
 		} catch (PedidoServiceException e) {
-			
+
 			e.printStackTrace();
 		}
-		
-		
-		scanner.close();
-		
-		
-		
-		
 
-	
+		scanner.close();
+
 	}
 }

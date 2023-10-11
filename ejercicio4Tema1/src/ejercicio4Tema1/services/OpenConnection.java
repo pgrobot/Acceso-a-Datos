@@ -5,10 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class OpenConnection {
-	
-	
-	
-	
+
 	public Connection getConnection() throws SQLException {
 		String url = "jdbc:mariadb://localhost:3306/pedidos";
 		String clase = "org.mariadb.jdbc.Driver";

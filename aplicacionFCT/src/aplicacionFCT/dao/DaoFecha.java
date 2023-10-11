@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,18 @@ public class DaoFecha {
 		ResultSet rs = null;
 
 		try {
-			String sql = "SELECT * FROM FECHAS";
+			String sql = "SELECT * FROM FECHAS WHERE AÑO=? AND EVALUACION=?";
 			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, LocalDate.now().getYear());
+			if (LocalDate.now().getMonthValue() >= 9 || LocalDate.now().getMonthValue() <= 12) {
+				stmt.setInt(2, 1);
+			} else if (LocalDate.now().getMonthValue() == 1 || LocalDate.now().getMonthValue() == 2) {
+				stmt.setInt(2, 2);
+			} else if (LocalDate.now().getMonthValue() > 2 || LocalDate.now().getMonthValue() <= 6) {
+				stmt.setInt(2, 3);
+			} else {
+				stmt.setInt(2, 4);
+			}
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				Fecha fecha = new Fecha();
