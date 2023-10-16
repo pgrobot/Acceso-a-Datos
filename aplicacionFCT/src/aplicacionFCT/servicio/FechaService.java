@@ -19,7 +19,7 @@ public class FechaService {
 		this.dF = new DaoFecha();
 	}
 
-	public List<Fecha> consultarListaRegistro(Long id) {
+	public List<Fecha> consultarListaFechas() {
 		List<Fecha> lista = new ArrayList<>();
 		Connection conn = null;
 		try {

@@ -21,26 +21,19 @@ public class RegistroService {
 	}
 
 	public void nuevoRegistro(Registro reg) throws FCTServiceException {
-		Registro regi = new Registro();
+		Registro regi;
 
 		Connection conn = null;
 		try {
 			conn = oc.getConnection();
-			conn.setAutoCommit(false);
-			if (dR.consultarRegistro(conn, regi) == null) {
-				dR.insertarRegistro(regi, conn);
+			regi = dR.consultarRegistro(conn, reg);
+			if (regi == null) {
+				dR.insertarRegistro(reg, conn);
 			} else {
 				throw new FCTServiceException("Hay un registro de este usuario ese dia");
 			}
-			conn.commit();
-		} catch (SQLException e) {
-			if (conn != null) {
-				try {
-					conn.rollback();
-				} catch (SQLException e1) {
 
-				}
-			}
+		} catch (SQLException e) {
 			throw new FCTServiceException("Hay algun error con la base de datos" + e, e);
 		} finally {
 
@@ -54,14 +47,15 @@ public class RegistroService {
 
 	}
 
-	public List<Registro> consultarListaRegistro(Long id) {
+	public List<Registro> consultarListaRegistro(Long idUsuario) throws FCTServiceException {
 		List<Registro> lista = new ArrayList<>();
 		Connection conn = null;
 		try {
 			conn = oc.getConnection();
-			lista = dR.consultarListaRegistro(id, conn);
+			lista = dR.consultarListaRegistro(idUsuario, conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new FCTServiceException("Hay un error en la base de datos" + e, e);
 		}
 
 		return lista;

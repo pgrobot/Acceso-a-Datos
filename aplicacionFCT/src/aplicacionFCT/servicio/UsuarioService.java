@@ -26,7 +26,11 @@ public class UsuarioService {
 		try {
 			conn = oc.getConnection();
 			us = dU.consultarUsuario(conn, email);
-
+			if (us == null) {
+				throw new FCTServiceException("No existe ese email");
+			} else if (!us.getPassword().equals(password)) {
+				throw new FCTServiceException("La contraseña esta mal");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new FCTServiceException("Hay algun error con la base de datos" + e, e);
@@ -44,21 +48,16 @@ public class UsuarioService {
 		Connection conn = null;
 		try {
 			conn = oc.getConnection();
-			conn.setAutoCommit(false);
-			if (dU.consultarUsuario(conn, us.getEmail()) == null) {
+
+			Usuario usu = new Usuario();
+			usu = dU.consultarUsuario(conn, us.getEmail());
+			if (usu == null) {
 				dU.insertarUsuario(conn, us);
 			} else {
 				throw new FCTServiceException("Hay un usuario con ese email");
 			}
-			conn.commit();
-		} catch (SQLException e) {
-			if (conn != null) {
-				try {
-					conn.rollback();
-				} catch (SQLException e1) {
 
-				}
-			}
+		} catch (SQLException e) {
 			throw new FCTServiceException("Hay algun error con la base de datos" + e, e);
 		} finally {
 

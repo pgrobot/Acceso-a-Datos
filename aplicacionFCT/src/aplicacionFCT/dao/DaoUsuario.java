@@ -27,6 +27,7 @@ public class DaoUsuario {
 				us.setPassword(rs.getString("password"));
 				us.setNombre(rs.getString("nombre"));
 				us.setIdUsuario(rs.getLong("id_usuario"));
+				return us;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -42,7 +43,8 @@ public class DaoUsuario {
 			}
 
 		}
-		return us;
+		return null;
+
 	}
 
 	public void insertarUsuario(Connection conn, Usuario us) throws SQLException {

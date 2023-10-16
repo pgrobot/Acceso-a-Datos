@@ -60,8 +60,8 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id_usuario=" + idUsuario + ", email=" + email + ", password=" + password + ", nombre="
-				+ nombre + ", apellidos=" + apellidos + ", ciclo=" + ciclo + ", activo=" + activo + "]";
+		return "Usuario [id_usuario=" + idUsuario + ", email=" + email + ", password=" + password + ", nombre=" + nombre
+				+ ", apellidos=" + apellidos + ", ciclo=" + ciclo + ", activo=" + activo + "]";
 	}
 
 	public Long getIdUsuario() {

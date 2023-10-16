@@ -21,7 +21,7 @@ public class DaoRegistro {
 			String sql = "SELECT * FROM REGISTROS WHERE FECHA=? AND ID_USUARIO=?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setDate(1, Date.valueOf(reg.getFecha()));
-			stmt.setLong(1, reg.getIdUsuario());
+			stmt.setLong(2, reg.getIdUsuario());
 			rs = stmt.executeQuery();
 			if (rs.next()) {
 				regi.setDescripcion(rs.getString("descripcion"));
@@ -29,6 +29,7 @@ public class DaoRegistro {
 				regi.setIdUsuario(rs.getLong("id_usuario"));
 				regi.setNumHoras(rs.getDouble("num_horas"));
 				regi.setFecha(rs.getDate("fecha").toLocalDate());
+				return regi;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -44,7 +45,7 @@ public class DaoRegistro {
 			}
 
 		}
-		return regi;
+		return null;
 
 	}
 
