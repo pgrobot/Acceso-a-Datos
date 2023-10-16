@@ -1,6 +1,6 @@
 package ejercicio1Tema1.modelo;
 
-public class Cliente {
+public class Pelicula {
 
 	private Integer id;
 	private String titulo;

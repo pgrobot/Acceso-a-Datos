@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ejercicio1Tema1.modelo.Cliente;
+import ejercicio1Tema1.modelo.Pelicula;
 import ejercicio1Tema1.services.PeliculaServiceException;
 
 public class Dao {
 
-	public List<Cliente> consultarPeliculas(Connection conn) throws PeliculaServiceException {
+	public List<Pelicula> consultarPeliculas(Connection conn) throws PeliculaServiceException {
 
-		List<Cliente> lista = new ArrayList<>();
+		List<Pelicula> lista = new ArrayList<>();
 
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -26,7 +26,7 @@ public class Dao {
 
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				Cliente peli = new Cliente();
+				Pelicula peli = new Pelicula();
 				peli.setId(rs.getInt("film_id"));
 				peli.setTitulo(rs.getString("title"));
 				peli.setLongitud(rs.getInt("length"));

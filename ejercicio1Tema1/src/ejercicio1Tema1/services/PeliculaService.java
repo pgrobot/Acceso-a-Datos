@@ -7,12 +7,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import ejercicio1Tema1.dao.Dao;
-import ejercicio1Tema1.modelo.Cliente;
+import ejercicio1Tema1.modelo.Pelicula;
 
 public class PeliculaService {
 
-	public List<Cliente> consultarPeliculas() throws PeliculaServiceException {
-		List<Cliente> lista = new ArrayList<>();
+	public List<Pelicula> consultarPeliculas() throws PeliculaServiceException {
+		List<Pelicula> lista = new ArrayList<>();
 
 		OpenConnection oc = new OpenConnection();
 		Dao dao = new Dao();
@@ -24,8 +24,8 @@ public class PeliculaService {
 		}
 		lista = dao.consultarPeliculas(conn);
 
-		for (Iterator<Cliente> iterator = lista.iterator(); iterator.hasNext();) {
-			Cliente pelicula = (Cliente) iterator.next();
+		for (Iterator<Pelicula> iterator = lista.iterator(); iterator.hasNext();) {
+			Pelicula pelicula = (Pelicula) iterator.next();
 			if (pelicula.getLongitud() >= 100) {
 				iterator.remove();
 			}

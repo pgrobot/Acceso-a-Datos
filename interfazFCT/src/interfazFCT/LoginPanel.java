@@ -6,19 +6,28 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import aplicacionFCT.exceptions.FCTServiceException;
+import aplicacionFCT.servicio.UsuarioService;
 
 public class LoginPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField textFieldEmail;
 	private JTextField textFieldContra;
-
+	private UsuarioService uS;
+	private VentanaMain vMain;
+	
 	/**
 	 * Create the panel.
 	 */
-	public LoginPanel() {
+	public LoginPanel(VentanaMain vM) {
+		vMain=vM;
+		uS= new UsuarioService();
 		setLayout(null);
 		
 		JLabel lblEmail = new JLabel("Email:");
@@ -36,7 +45,7 @@ public class LoginPanel extends JPanel {
 		add(textFieldEmail);
 		textFieldEmail.setColumns(10);
 		
-		textFieldContra = new JTextField();
+		textFieldContra = new JPasswordField();
 		textFieldContra.setColumns(10);
 		textFieldContra.setBounds(264, 312, 207, 32);
 		add(textFieldContra);
@@ -57,10 +66,21 @@ public class LoginPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					uS.login(textFieldEmail.getText(), textFieldContra.getText());
+				} catch (FCTServiceException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
+		btnSolicitar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				vMain.cambiarRegistroPanel();
+			}
+		});
 		
 	}
 }
